@@ -1,6 +1,7 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, __version__
 import yfinance as yf
 from datetime import datetime, timedelta
+from fastapi.responses import HTMLResponse
 
 description = """
 Try out QuestArc Technical Indicator APIs. 🚀
@@ -22,6 +23,31 @@ title="QuestArc Technical Analysis APIs",
         "url": "https://www.apache.org/licenses/LICENSE-2.0.html",
     },
 )
+
+html = f"""
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome to QuestArc Technical Indicator API's</title>
+    </head>
+    <body>
+        <div class="bg-gray-200 p-4 rounded-lg shadow-lg">
+            <h1>Welcome to QuestArc Technical Indicator API's version {__version__}</h1>
+            <ul>
+                <li><a href="/docs">/docs</a></li>
+                <li><a href="/redoc">/redoc</a></li>
+            </ul>
+            <p>Powered by <a href="https://www.questarctechnologies.com/" target="_blank">QuestArc Technologies</a></p>
+        </div>
+    </body>
+</html>
+"""
+
+@app.get("/")
+async def root():
+    return HTMLResponse(html)
+
+
 def calculate_ad_ratio(data):
     advancers = sum(1 for close_price in data['Close'] if close_price > data['Open'][0])
     decliners = sum(1 for close_price in data['Close'] if close_price < data['Open'][0])
