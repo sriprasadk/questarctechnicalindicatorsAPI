@@ -47,12 +47,20 @@ html = f"""
 async def root():
     return HTMLResponse(html)
 
-
 def calculate_ad_ratio(data):
-    advancers = sum(1 for close_price in data['Close'] if close_price > data['Open'][0])
-    decliners = sum(1 for close_price in data['Close'] if close_price < data['Open'][0])
+    open_price = data['Open'][0]  # Get the open price of the first day
+    
+    # Count the number of advancers and decliners
+    advancers = sum(1 for close_price in data['Close'] if close_price > open_price)
+    decliners = sum(1 for close_price in data['Close'] if close_price < open_price)
+    
+    # Calculate the Advance-Decline ratio
     ad_ratio = advancers / decliners if decliners != 0 else advancers
+    
     return ad_ratio
+
+
+    
 
 @app.get("/technicalindicator/advance-decline-ratio/{ticker}")
 async def get_ad_ratio(ticker: str):
