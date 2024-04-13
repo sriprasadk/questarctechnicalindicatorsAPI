@@ -87,3 +87,34 @@ async def get_ad_ratio(ticker: str):
     
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+def calculate_rsi(data, window=14):
+    delta = data.diff(1)
+    gain = (delta.where(delta > 0, 0)).rolling(window=window).mean()
+    loss = (-delta.where(delta < 0, 0)).rolling(window=window).mean()
+    rs = gain / loss
+    rsi = 100 - (100 / (1 + rs))
+    return rsi
+
+@app.get("/technicalindicator/relative-strength-index/{ticker}")
+async def get_rsi(ticker: str):
+    try:
+        # Fetch data from Yahoo Finance
+        end_date = datetime.today().strftime('%Y-%m-%d')
+        start_date = (datetime.today() - timedelta(days=365)).strftime('%Y-%m-%d')
+        df = yf.download(ticker, start=start_date, end=end_date)
+
+        # Check if data is available
+        if df.empty:
+            raise HTTPException(status_code=404, detail="No data available for this ticker.")
+
+        # Calculate RSI
+        df['RSI'] = calculate_rsi(df['Close'])
+
+        # Get the latest RSI value
+        latest_rsi = df['RSI'].iloc[-1]
+
+        return {"ticker": ticker, "Relative Strength Index": latest_rsi}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
