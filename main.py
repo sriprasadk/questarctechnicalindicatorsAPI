@@ -133,12 +133,13 @@ def calculate_vortex(data, window=14):
     
     return vi_plus, vi_minus
     
-@app.get("/technicalindicator/Vortex Indicator/{ticker}", tags=["Vortex Indciator"])
+@app.get("/technicalindicator/VortexIndicator/{ticker}", tags=["Vortex Indciator"])
 async def get_Vortex_Indicator(ticker: str):
     try:
         # Fetch data from Yahoo Finance
-      
+        print("Ticker", ticker)
         df = yf.download(ticker, period="1y")
+        print(df)
         # Check if data is available
         if df.empty:
             raise HTTPException(status_code=404, detail="No data available for this ticker.")
