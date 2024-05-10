@@ -61,7 +61,7 @@ def calculate_ad_ratio(data):
     return ad_ratio
 
     
-@app.get("/technicalindicator/advance-decline-ratio/{ticker}", tags=["Advance Decline Ratio"])
+@app.get("api/v1/technicalindicator/advance-decline-ratio/{ticker}", tags=["Advance Decline Ratio"])
 async def get_Advance_Decline_ratio(ticker: str):
     try:
         # Calculate start and end dates
@@ -96,7 +96,7 @@ def calculate_rsi(data, window=14):
     rsi = 100 - (100 / (1 + rs))
     return rsi
 
-@app.get("/technicalindicator/relative-strength-index/{ticker}", tags=["Relative Strength Index"])
+@app.get("api/v1/technicalindicator/relative-strength-index/{ticker}", tags=["Relative Strength Index"])
 async def get_Relative_Strength_Index(ticker: str):
     try:
         # Fetch data from Yahoo Finance
@@ -133,7 +133,7 @@ def calculate_vortex(data, window=14):
     
     return vi_plus, vi_minus
     
-@app.get("/technicalindicator/VortexIndicator/{ticker}", tags=["Vortex Indciator"])
+@app.get("api/v1/technicalindicator/VortexIndicator/{ticker}", tags=["Vortex Indciator"])
 async def get_Vortex_Indicator(ticker: str):
     try:
         # Fetch data from Yahoo Finance
