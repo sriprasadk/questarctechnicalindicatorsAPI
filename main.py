@@ -5,8 +5,23 @@ from fastapi.responses import HTMLResponse
 import json
 
 description = """
-Try out QuestArc Technical Indicator APIs. 🚀
-- Advance Decline Ratio: The Advance-Decline ratio is a technical indicator used by traders and analysts to gauge the overall health of a stock market index or individual stock. It measures the ratio of advancing stocks (those that increase in price) to declining stocks (those that decrease in price) over a given period of time.  The API calculates the ratio for the ticker based on last 6 months historic data. Also try the Quest Arc AI/ML apps to view the charts.
+**QuestArc Technical Indicator APIs. 🚀**
+- **Advance Decline Ratio**: The Advance-Decline ratio is a technical indicator used by traders and analysts to gauge the overall health of a stock market index or individual stock. It measures the ratio of advancing stocks (those that increase in price) to declining stocks (those that decrease in price) over a given period of time.  The API calculates the ratio for the ticker based on last 6 months historic data. Also try the Quest Arc AI/ML apps to view the charts.
+- **Relative Strength Index**: The Relative Strength Index (RSI) is a momentum oscillator that measures the speed and change of price movements. It ranges from 0 to 100 and is typically used to determine whether a stock is overbought or oversold.
+- **Vortex Indciator**: Vortex Indicator is a technical indicator that measures the direction of trend movement and identifies potential trend reversals. It consists of two lines: VI+ (positive vortex) and VI- (negative vortex).
+
+**Subscribe for More Technical Indicators!**
+- If you're finding our technical indicators useful, why not subscribe? By subscribing, you'll get access to a wider range of technical indicators tailored to your trading needs.
+
+**Why Subscribe?**
+- **Expanded Toolkit:** Unlock a plethora of additional technical indicators to enhance your trading strategies.
+- **Stay Ahead:** Get access to the latest updates and new indicators as soon as they're available, keeping you ahead of the curve.
+- **Customization:** Tailor your subscription to match your specific trading style and preferences.
+- **Expert Insights:** Gain access to exclusive content and analysis from seasoned traders to help refine your trading approach.
+
+**How to Subscribe?**
+- Contact Sales - sales@questarctechnologies.com (www.questarctechnologies.com)
+
 """
 
 app = FastAPI(
